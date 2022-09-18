@@ -11,7 +11,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.FoodHelper">
         <activity
-            android:name=".MainActivity"
+            android:name=".activites.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
