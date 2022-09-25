@@ -1,5 +1,5 @@
 package com.app.foodhelper.pojo
 
 data class CategoryList(
-    val meals: List<CategoryMeals>
+    val categories: List<Category>
 )

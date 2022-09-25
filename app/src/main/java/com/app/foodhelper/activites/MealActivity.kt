@@ -32,7 +32,6 @@ class MealActivity : AppCompatActivity() {
         mealMvvm = ViewModelProviders.of(this)[MealViewModel::class.java]
 
         getMealInformationFromIntent()
-
         setInformationInViews()
 
         loadingCase()
