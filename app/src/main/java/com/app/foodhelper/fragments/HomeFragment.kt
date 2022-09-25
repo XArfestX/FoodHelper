@@ -2,7 +2,6 @@ package com.app.foodhelper.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.foodhelper.activites.CategoryMealsActivity
 import com.app.foodhelper.activites.MealActivity
 import com.app.foodhelper.adapters.CategoriesAdapter
 import com.app.foodhelper.adapters.MostPopularAdapter
@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
         const val MEAL_ID = "com.app.foodhelper.fragments.idMeal"
         const val MEAL_NAME = "com.app.foodhelper.fragments.nameMeal"
         const val MEAL_THUMB = "com.app.foodhelper.fragments.thumbMeal"
+        const val CATEGORY_NAME = "com.app.foodhelper.fragments.categoryName"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +65,15 @@ class HomeFragment : Fragment() {
         prepareCategoriesRecyclerView()
         homeMvvm.getCategories()
         observerCategoriesLiveData()
+        onCategoryClick()
+    }
+
+    private fun onCategoryClick() {
+        categoriesAdapter.onItemClick = { category ->
+            val intent = Intent(activity, CategoryMealsActivity::class.java)
+            intent.putExtra(CATEGORY_NAME, category.strCategory)
+            startActivity(intent)
+        }
     }
 
     private fun prepareCategoriesRecyclerView() {
