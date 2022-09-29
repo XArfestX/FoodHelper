@@ -1,17 +1,20 @@
 package com.app.foodhelper.viewModel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.app.foodhelper.db.MealDatabase
 import com.app.foodhelper.pojo.Meal
 import com.app.foodhelper.pojo.MealList
 import com.app.foodhelper.retrofit.RetrofitInstance
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MealViewModel(): ViewModel() {
+class MealViewModel(
+    val mealDatabase: MealDatabase
+): ViewModel() {
+
     private var mealDetailsLiveData = MutableLiveData<Meal>()
 
     fun getMealDetail(id:String){
@@ -34,4 +37,17 @@ class MealViewModel(): ViewModel() {
     fun observerMealDetailsLiveData():LiveData<Meal>{
         return mealDetailsLiveData
     }
+
+    fun insertMeal(meal: Meal){
+        viewModelScope.launch {
+            mealDatabase.mealDao().upsetr(meal)
+        }
+    }
+
+    fun deleteMeal(meal: Meal){
+        viewModelScope.launch {
+            mealDatabase.mealDao().delete(meal)
+        }
+    }
+
 }

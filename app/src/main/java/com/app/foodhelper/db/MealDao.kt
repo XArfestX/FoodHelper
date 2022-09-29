@@ -7,7 +7,7 @@ import com.app.foodhelper.pojo.Meal
 @Dao
 interface MealDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(meal: Meal)
+    suspend fun upsetr(meal: Meal)
 
     @Delete
     suspend fun delete(meal: Meal)
